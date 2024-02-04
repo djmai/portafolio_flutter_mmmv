@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Colores
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(dart)$')
+
+# Verificar cada archivo para TODOs sin referencias a JIRA o GitHub issues
+for file in $files; do
+    todos=$(grep -n -E -i "TODO" "$file" | grep -vE "(JIRA|GitHub)[^A-Za-z0-9]#[0-9]+")
+    
+    if [ -n "$todos" ]; then
+        echo -e "${RED}Error:${NC} ${YELLOW}Se encontraron TODOs sin referencias a JIRA o GitHub issues en el archivo $file:${NC}"
+        echo -e "${RED}$todos${NC}"
+        exit 1
+    fi
+done
+
+# Ejecuta dart formato y checa errores
+if ! output=$(dart format --line-length 80 --set-exit-if-changed .\/lib .\/test); then
+    echo -e "${YELLOW}COMMIT REJECTED: Dart format found the following errors:${NC}"
+    echo -e "${RED}$output${NC}"
+    exit 1
+fi
+
+# Ejecuta CSpell
+if ! output=$(cspell "**" --config .\/.github\/cspell.json); then
+    echo -e "${YELLOW}COMMIT REJECTED: CSpell found the following errors:${NC}"
+    echo -e "${RED}$output${NC}"
+    exit 1
+fi
+
+# Run Flutter analiza y checa errores
+if ! output=$(flutter analyze .\/lib .\/test); then
+    echo -e "${YELLOW}COMMIT REJECTED: Flutter analyze found the following errors:${NC}"
+    echo -e "${RED}$output${NC}"
+    exit 1
+fi
+
+# Ejecuta Dart analiza y checa errores
+if ! output=$(dart analyze .\/lib .\/test); then
+    echo -e "${YELLOW}COMMIT REJECTED: Dart analyze found the following errors:${NC}"
+    echo -e "${RED}$output${NC}"
+    exit 1
+fi
+
+# Compruebe que todas las pruebas estén pasando
+if ! output=$(dart pub global run very_good_cli:very_good test -j 4 --optimization --coverage --test-randomize-ordering-seed random --min-coverage=0); then
+    echo -e "${YELLOW}COMMIT REJECTED: Very_good Test found the following errors:${NC}"
+    echo -e "${RED}$output${NC}"
+    exit 1
+fi
+
+# Si llegamos hasta aquí, el compromiso está permitido.
+exit 0

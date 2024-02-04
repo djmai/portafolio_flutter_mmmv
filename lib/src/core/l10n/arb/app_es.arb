@@ -1,0 +1,24 @@
+{
+  "@@locale": "es",
+  "homeAppBarTitle": "Página de Inicio",
+  "@homeAppBarTitle": {
+    "description": "Texto mostrado en la AppBar de la página de inicio"
+  },
+  "author": "Miguel Martínez",
+  "@author": {
+    "description": "Texto mostrado como autor"
+  },
+  "email_contact": "contacto@mmartinezdev.com",
+  "@email_contact": {
+    "description": "Texto mostrado como correo electrónico de contacto"
+  },
+  "website": "https://mmartinezdev.com",
+  "@website": {
+    "description": "Texto mostrado como sitio web"
+  },
+  "copyright": "Derechos de autor © {year}",
+  "@copyright": {
+    "description": "Texto mostrado como derechos de autor"
+  }
+}
+

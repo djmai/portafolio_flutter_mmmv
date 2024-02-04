@@ -1,0 +1,54 @@
+name: portafolio_flutter_mmmv
+description: Portafolio de practicas de Flutter
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.1.0 <4.0.0"
+
+dependencies:
+  bloc: ^8.1.2
+  easy_localization: ^3.0.3
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.3
+  flutter_launcher_icons: ^0.13.1
+  flutter_localizations:
+    sdk: flutter
+  freezed_annotation: ^2.4.1
+  get_it: ^7.6.7
+  go_router: ^13.1.0
+  intl: ^0.18.0
+  provider: ^6.1.1
+
+dev_dependencies:
+  bloc_test: ^9.1.4
+  build_runner: ^2.4.8
+  commitlint_cli: ^0.7.1
+  flutter_test:
+    sdk: flutter
+  freezed: ^2.4.6
+  husky: ^0.1.7
+  mocktail: ^1.0.0
+  very_good_analysis: ^5.1.0
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/img/logo_app.png"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/img/logo_app.png"
+  windows:
+    generate: true
+    image_path: "assets/img/logo_app.png"
+    icon_size: 48
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/
+    - assets/img/
