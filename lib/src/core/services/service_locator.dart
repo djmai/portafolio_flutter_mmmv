@@ -1,12 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:portafolio_flutter_mmmv/src/core/localization/localization.dart';
-import 'package:portafolio_flutter_mmmv/src/core/routes/routes.dart';
+import 'package:portafolio_flutter_mmmv/src/features/login/presentation/cubit/login_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
 void serviceLocatorInt() {
   getIt
-    ..registerSingleton(RouterCubit(routes: publicRouter))
-    // ..registerLazySingleton<LocaleProvider>(LocaleProvider.new)
+    ..registerSingleton<LoginCubit>(LoginCubit())
     ..registerFactory<LocaleProvider>(LocaleProvider.new);
 }

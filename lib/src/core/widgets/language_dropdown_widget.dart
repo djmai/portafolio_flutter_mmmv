@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:portafolio_flutter_mmmv/src/core/constants/constants.dart';
 import 'package:portafolio_flutter_mmmv/src/core/localization/localization.dart';
-import 'package:provider/provider.dart';
+import 'package:portafolio_flutter_mmmv/src/core/services/services.dart';
 
 class LanguageDropdownWidget extends StatelessWidget {
   const LanguageDropdownWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final localeProvider = Provider.of<LocaleProvider>(context);
+    // final localeProvider = Provider.of<LocaleProvider>(context);
+    final localeProvider = getIt<LocaleProvider>();
 
     return Padding(
       padding: const EdgeInsets.all(8),

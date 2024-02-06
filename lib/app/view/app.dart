@@ -5,8 +5,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = context.watch<RouterCubit>().state;
-    final localeProvider = Provider.of<LocaleProvider>(context);
+    final localeProvider = getIt<LocaleProvider>();
+    final loginCubit = getIt<LoginCubit>();
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
         useMaterial3: false,
       ),
       locale: localeProvider.locale,
-      routerConfig: appRouter.router,
+      routerConfig: AppRouter(loginCubit).router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizationsX.supportedLocales,
     );

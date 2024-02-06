@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portafolio_flutter_mmmv/src/core/l10n/l10n.dart';
 import 'package:portafolio_flutter_mmmv/src/core/widgets/widgets.dart';
+import 'package:portafolio_flutter_mmmv/src/features/features.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static const String routeName = '/home';
+  static const String namePage = 'home';
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +19,15 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.homeAppBarTitle),
         centerTitle: true,
-        actions: const <Widget>[
-          LanguageDropdownWidget(),
+        actions: <Widget>[
+          const LanguageDropdownWidget(),
+          IconButton(
+            onPressed: () {
+              // context.read<LoginCubit>().logout();
+              context.go(LoginPage.routeName);
+            },
+            icon: const Icon(Icons.logout),
+          ),
         ],
       ),
       body: Column(
