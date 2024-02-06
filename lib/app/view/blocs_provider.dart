@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:portafolio_flutter_mmmv/src/core/l10n/l10n.dart';
 import 'package:portafolio_flutter_mmmv/src/core/localization/localization.dart';
 import 'package:portafolio_flutter_mmmv/src/core/routes/app_router.dart';
@@ -23,7 +24,7 @@ class BlocsProvider extends StatelessWidget {
           create: (_) => getIt<LocaleProvider>(),
         ),
       ],
-      child: const App(),
+      child: App(),
     );
   }
 }

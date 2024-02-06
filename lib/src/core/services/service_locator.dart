@@ -7,5 +7,5 @@ GetIt getIt = GetIt.instance;
 void serviceLocatorInt() {
   getIt
     ..registerSingleton<LoginCubit>(LoginCubit())
-    ..registerFactory<LocaleProvider>(LocaleProvider.new);
+    ..registerSingleton<LocaleProvider>(LocaleProvider());
 }
