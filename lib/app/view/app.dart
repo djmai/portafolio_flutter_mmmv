@@ -1,11 +1,11 @@
 part of 'blocs_provider.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class App extends StatelessWidget with GetItMixin {
+  App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final localeProvider = getIt<LocaleProvider>();
+    final locale = watchOnly((LocaleProvider m) => m.locale);
     final loginCubit = getIt<LoginCubit>();
 
     return MaterialApp.router(
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
       ),
-      locale: localeProvider.locale,
+      locale: locale,
       routerConfig: AppRouter(loginCubit).router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizationsX.supportedLocales,
