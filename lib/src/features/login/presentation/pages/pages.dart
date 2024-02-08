@@ -23,15 +23,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                context.go(
-                  context.namedLocation(HomePage.namePage),
-                );
-                // context.go(HomePage.routeName);
-              },
-              child: const Text('Go to Home'),
-            ),
+            btnLogin(context),
             ElevatedButton(
               onPressed: () {
                 // context.go(
@@ -41,7 +33,6 @@ class LoginPage extends StatelessWidget {
               },
               child: const Text('Go to register'),
             ),
-            btnLogin(context),
           ],
         ),
       ),
